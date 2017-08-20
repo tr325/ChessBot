@@ -3,33 +3,41 @@ import pieces as pc
 class Board():
     
     def __init__(self):
-        self.board = [[None for i in range(8)] for i in range(8)]
+        self.pieces = []
         # set up a blank chess board
-        self.board[0][0] = pc.Rook()
-        self.board[0][1] = pc.Knight()
-        self.board[0][2] = pc.Bishop()
-        self.board[0][3] = pc.King()
-        self.board[0][4] = pc.Queen()
-        self.board[0][5] = pc.Bishop()
-        self.board[0][6] = pc.Knight()
-        self.board[0][7] = pc.Rook()
-        self.board[1] = [pc.Pawn() for i in range(8)]
-        self.board[7][0] = pc.Rook(True)
-        self.board[7][1] = pc.Knight(True)
-        self.board[7][2] = pc.Bishop(True)
-        self.board[7][3] = pc.King(True)
-        self.board[7][4] = pc.Queen(True)
-        self.board[7][5] = pc.Bishop(True)
-        self.board[7][6] = pc.Knight(True)
-        self.board[7][7] = pc.Rook(True)
-        self.board[6] = [pc.Pawn(True) for i in range(8)]
+        self.pieces.append(pc.Rook(0,0))
+        self.pieces.append(pc.Knight(1,0))
+        self.pieces.append(pc.Bishop(2,0))
+        self.pieces.append(pc.Queen(3,0))
+        self.pieces.append(pc.King(4,0))
+        self.pieces.append(pc.Bishop(5,0))
+        self.pieces.append(pc.Knight(6,0))
+        self.pieces.append(pc.Rook(7,0))
+        for i in range(8):
+            self.pieces.append(pc.Pawn(i,1))
+        self.pieces.append(pc.Rook(0,7,True))
+        self.pieces.append(pc.Knight(1,7,True))
+        self.pieces.append(pc.Bishop(2,7,True))
+        self.pieces.append(pc.Queen(3,7,True))
+        self.pieces.append(pc.King(4,7,True))
+        self.pieces.append(pc.Bishop(5,7,True))
+        self.pieces.append(pc.Knight(6,7,True))
+        self.pieces.append(pc.Rook(7,7,True))
+        for i in range(8):
+            self.pieces.append(pc.Pawn(i,6,True))
+
+    def get_piece_at(self, x, y):
+        for p in self.pieces:
+            if(p.is_at(x,y)):
+                return p
 
     def render(self):
         rendered = ""
-        for i in range(7,-1,-1):
-            for j in range(7,-1,-1):
-                if self.board[i][j]:
-                    rendered = rendered+self.board[i][j].str()
+        for y in range(7,-1,-1):
+            for x in range(8):
+                p = self.get_piece_at(x, y)
+                if(p):
+                    rendered = rendered+p.str()
                 else:
                     rendered = rendered+"."
             rendered = rendered+"\n"
@@ -37,3 +45,4 @@ class Board():
 
 if __name__ == '__main__':
     print(Board().render())
+
