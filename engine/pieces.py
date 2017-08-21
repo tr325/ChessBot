@@ -1,4 +1,5 @@
 from transform import Transform as T
+from move import Move
 
 class Piece():
     display_as = "x" # Overwrite in child classes
@@ -8,13 +9,18 @@ class Piece():
     # Code is more natural checking for "whiteness" first
     def __init__(self, x, y, is_black=False):
         self.is_white = not is_black
-        self.position = {
-            'x': x,
-            'y': y
-        }
+        self.x = x
+        self.y = y
         
+    def get_position(self):
+        return [self.x, self.y]
+
+    def set_position(self, x, y):
+        self.x = x
+        self.y = y
+
     def is_at(self, x, y):
-        return ((self.position['x'] == x) and (self.position['y'] == y))
+        return ((self.x == x) and (self.y == y))
 
     def str(self):
         if(self.is_white):
@@ -43,7 +49,7 @@ class Pawn(Piece):
         for i in range(moves.length):
             if(moves[i].is_valid()):
                 valid.append(moves[i])
-        return valie
+        return valid
 
 class Rook(Piece):
     display_as = "r"
