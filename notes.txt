@@ -1,0 +1,32 @@
+# TODO next:
+- Contructor of peices changes to set their position.
+- retest board rendering
+- Work out how to test Move.is_valid
+- work out how to test piece.get_valid_moves
+    -- maybe just needs to check the total length of all possible moves?
+- Implement Nodes
+    -- move values.
+
+
+===================================================================
+Piece needs to know it's own position. Also add in "is_alive". Board no longer needs to know positions, can just ask all pieces. iterate over live pieces asking for position. Innefficient? Do I care?
+
+Board has 'live' version, and the searched versions for the tree are made by cloning htat state, then applying the moves down the tree.
+- ?? do you need to traverse both ways?
+
+Piece knows possible moves, and its current position
+- ie. the tranforms it can go to. 
+
+Move knows is_valid, and stores that move's transform and piece.
+- needs: Board. Transform. piece
+
+Nodes are all the is_valid moves 
+
+Gets value of move by trying every valid move. From current position. knows transforms, asks board if newPos is valid.
+
+Node stores value of valid moves, and their parent/children/depth. THis allows board state to be recalculated. Tree keeps array of arrays of [current level of tree][node]
+
+Recursively find all valid moves until depth == N, searching at each recursion. (later concern)
+
+
+
