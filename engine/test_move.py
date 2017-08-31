@@ -25,8 +25,23 @@ class MoveTest(unittest.TestCase):
         b = board.Board()
         b.pieces.extend([q,p])
         self.assertTrue(move.Move(b, q,  T(1,1,1)).is_valid())
-        self.assertTrue(move.Move(b, q, T(0,1,1)).is_valid())
         self.assertFalse(move.Move(b, q, T(0,1,2)).is_valid())
+
+    def test_is_valid_capture(self):
+        q = pc.Queen(3,3)
+        p = pc.Pawn(3,4)
+        r = pc.Rook(2,3,True)
+        b = board.Board()
+        b.pieces.extend([q,p,r])
+        print(1)
+        #self.assertTrue(move.Move(b, q,  T(1,1,1)).is_valid())
+        print(2)
+        print("LALAL", move.Move(b, q, T(0,1,1)).is_valid())
+        self.assertFalse(move.Move(b, q, T(0,1,1)).is_valid())
+        print(3)
+        print(q.x)
+        print(q.y)
+        #self.assertTrue(move.Move(b, q, T(-1,0,1)).is_valid())
 
     def test_apply(self):
         b = pc.Bishop(5,5)
