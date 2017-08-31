@@ -12,14 +12,11 @@ class Move():
             pos[0] = pos[0]+self.t.x
             pos[1] = pos[1]+self.t.y
             occupant = self.board.get_piece_at(pos[0], pos[1])
-            if(occupant and (i != self.t.magnitude-1)):
-                print("XXXX")
-                print(occupant.str())
-                print(occupant.is_white)
-                print(self.piece.str())
-                print(self.piece.is_white)
-                print("here", self.piece.is_white != occupant.is_white)
-                return (self.piece.is_white != occupant.is_white)
+            if(occupant):
+                if(i == self.t.magnitude-1):
+                    return (self.piece.is_white != occupant.is_white)
+                else:
+                    return False
             if((pos[0] > 7) or (pos[1] > 7) or (pos[0] < 0) or (pos[1] < 0)):
                 return False
         self.new_pos = pos
