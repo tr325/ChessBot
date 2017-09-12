@@ -1,8 +1,8 @@
 # TODO next:
-- work out how to test piece.get_valid_moves
-    -- maybe just needs to check the total length of all possible moves?
-- Implement Nodes
-    -- move values.
+Get move tables.
+Achieve DEPTH = 2
+? New 'Position' class? Seems to be annoying in a vriety of places
+
 
 
 ===================================================================
@@ -24,6 +24,4 @@ Gets value of move by trying every valid move. From current position. knows tran
 Node stores value of valid moves, and their parent/children/depth. THis allows board state to be recalculated. Tree keeps array of arrays of [current level of tree][node]
 
 Recursively find all valid moves until depth == N, searching at each recursion. (later concern)
-
-
 
