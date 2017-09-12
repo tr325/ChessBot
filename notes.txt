@@ -1,7 +1,4 @@
 # TODO next:
-- Contructor of peices changes to set their position.
-- retest board rendering
-- Work out how to test Move.is_valid
 - work out how to test piece.get_valid_moves
     -- maybe just needs to check the total length of all possible moves?
 - Implement Nodes

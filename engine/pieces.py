@@ -32,16 +32,15 @@ class Piece():
     def get_valid_moves(self, board):
         return False
 
-    def moves_in_direction(self, direction):
+    def moves_in_direction(self, board, direction):
         moves = []
         for i in range(8):
-            moves.push(T(direction[1], direction[2], i))
+            moves.append(Move(board, self, T(direction[0], direction[1], i+1)))
         return moves
 
-    def append_valid_move(board, transform):
-        move = Move(board, self, transform)
+    def append_valid_move(self, move):
         if(move.is_valid()):
-            self.valid_moves.push(move)
+            self.valid_moves.append(move)
 
 #### Concrete piece classes
 class Pawn(Piece):
@@ -56,7 +55,7 @@ class Pawn(Piece):
             self.append_valid_move(Move(board, self, T(0,1,2)))
         if(board.get_piece_at(self.x+1, self.y+1) != None):
             self.append_valid_move(Move(board, self, T(1,1,1)))
-        if(board.get_piece_at(self.x-1, self.y+1 != None)):
+        if(board.get_piece_at(self.x-1, self.y+1) != None):
             self.append_valid_move(Move(board, self, T(-1,1,1)))
         return self.valid_moves
 
@@ -68,7 +67,7 @@ class Rook(Piece):
         moves = []
         directions = [[0,1],[0,-1],[1,0],[-1,0]]
         for dir in directions:
-            moves.extend(self.moves_in_direction(dir))
+            moves.extend(self.moves_in_direction(board, dir))
         for move in moves:
             self.append_valid_move(move)
         return self.valid_moves
@@ -81,7 +80,7 @@ class Bishop(Piece):
         moves = []
         directions = [[1,1],[1,-1],[-1,1],[-1,-1]]
         for dir in directions:
-            moves.extend(self.moves_in_direction(dir))
+            moves.extend(self.moves_in_direction(board, dir))
         for move in moves:
             self.append_valid_move(move)
         return self.valid_moves
@@ -104,7 +103,7 @@ class Queen(Piece):
         moves = []
         directions = [[1,1],[1,-1],[-1,1],[-1,-1],[0,1],[0,-1],[1,0],[-1,0]]
         for dir in directions:
-            moves.extend(self.moves_in_direction(dir))
+            moves.extend(self.moves_in_direction(board, dir))
         for move in moves:
             self.append_valid_move(move)
         return self.valid_moves
@@ -115,7 +114,7 @@ class King(Piece):
 
     def get_valid_moves(self, board):
         moves = []
-        tranforms = [T(1,1),T(1,-1),T(-1,1),T(-1,-1),T(0,1),T(0,-1),T(1,0),T(-1,0)]
+        transforms = [T(1,1,1),T(1,-1,1),T(-1,1,1),T(-1,-1,1),T(0,1,1),T(0,-1,1),T(1,0,1),T(-1,0,1)]
         for t in transforms:
             self.append_valid_move(Move(board, self, t))
         return self.valid_moves

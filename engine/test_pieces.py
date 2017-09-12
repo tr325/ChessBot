@@ -1,5 +1,6 @@
 import unittest
 import pieces as P
+import board as board
 
 class PiecesTest(unittest.TestCase):
     

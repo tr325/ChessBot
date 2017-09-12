@@ -1,9 +1,25 @@
 import pieces as pc
+import node as node
 
 class Board():
     
+    # Number of moves calculated
+    MAX_DEPTH = 1
+
+    WHITE = True
+    BLACK = False
+
     def __init__(self):
         self.pieces = []
+        self._populate_new_board()
+        self.node_tree = [[]]
+        self.to_play = self.WHITE
+
+    # For ease of testing
+    def _clear_board(self):
+        self.pieces = []
+
+    def _populate_new_board(self):
         # set up a blank chess board
         self.pieces.append(pc.Rook(0,0))
         self.pieces.append(pc.Knight(1,0))
@@ -42,6 +58,16 @@ class Board():
                     rendered = rendered+"."
             rendered = rendered+"\n"
         return rendered
+
+    def populate_node_tree(self):
+        for i in range(self.MAX_DEPTH):
+            for p in self.pieces:
+                if(p.is_white == self.to_play):
+                    # TODO: Pass in copy of board when self.MAX_DEPTH > 1
+                    for m in p.get_valid_moves(self):
+                        # TODO: Track parent node when self.MAX_DEPTH > 1
+                        n = node.Node(None, m)
+                        self.node_tree[i].append(n)
 
 if __name__ == '__main__':
     print(Board().render())

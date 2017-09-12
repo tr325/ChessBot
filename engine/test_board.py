@@ -27,6 +27,9 @@ class BoardTest(unittest.TestCase):
             "PPPPPPPP\n"+
             "RNBQKBNR\n")
 
+    def test_populate_node_tree(self):
+        self.board.populate_node_tree()
+        self.assertEqual(len(self.board.node_tree[0]), 20)
 
 if __name__ == '__main__':
     unittest.main()
