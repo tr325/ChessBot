@@ -1,8 +1,19 @@
 # TODO next:
+Re-read RvR's talk notes! (Or even re-watch?)
 Get move tables.
 Achieve DEPTH = 2
 ? New 'Position' class? Seems to be annoying in a vriety of places
 
+
+===================================================================
+"true" board calculates move tree.
+As depth increases the board state changes. THis is calculated by Move, and so therefore should live on a Node.
+So, each move should be applied to a copy of the currentBoard, and then saved onto Node.
+Further child moves should use Node's board as currentBoard
+
+... except Move has board on it. Piece.getValidMoves is passed a board. move is then created with that board. 
+getValidMoves is called from Board.popoulteNodetree. So can pass through a cloned board, and save that to the Move, not the Node
+Move.apply9 then directly edits the board that's passed. But htat has to be done after evaulation because each of the possible valid moves for a piece would use the csame currentBoard object
 
 
 ===================================================================

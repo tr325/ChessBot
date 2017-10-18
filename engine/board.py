@@ -1,5 +1,6 @@
 import pieces as pc
 import node as node
+import copy
 
 class Board():
     
@@ -60,13 +61,14 @@ class Board():
         return rendered
 
     def populate_node_tree(self):
+        current_board = copy.copy(self)
         for i in range(self.MAX_DEPTH):
             for p in self.pieces:
-                if(p.is_white == self.to_play):
+                if(p.is_white == current_board.to_play):
                     # TODO: Pass in copy of board when self.MAX_DEPTH > 1
-                    for m in p.get_valid_moves(self):
+                    for m in p.get_valid_moves(current_board):
                         # TODO: Track parent node when self.MAX_DEPTH > 1
-                        n = node.Node(None, m)
+                        n = node.Node(None, current_board, m)
                         self.node_tree[i].append(n)
 
 if __name__ == '__main__':
