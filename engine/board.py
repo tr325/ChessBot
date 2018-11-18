@@ -4,21 +4,13 @@ import copy
 
 class Board():
     
-    # Number of moves calculated
-    MAX_DEPTH = 1
-
     WHITE = True
     BLACK = False
 
     def __init__(self):
         self.pieces = []
         self._populate_new_board()
-        self.node_tree = [[]]
         self.to_play = self.WHITE
-
-    # For ease of testing
-    def _clear_board(self):
-        self.pieces = []
 
     def _populate_new_board(self):
         # set up a blank chess board
@@ -43,10 +35,21 @@ class Board():
         for i in range(8):
             self.pieces.append(pc.Pawn(i,6,True))
 
+    # For ease of testing
+    def _clear_board(self):
+        self.pieces = []
+
     def get_piece_at(self, x, y):
         for p in self.pieces:
             if(p.is_at(x,y)):
                 return p
+
+    def remove_piece_at(self, x, y):
+        p = self.get_piece_at(x, y)
+        # TODO: simplest way to remove a value from an array in python?
+
+    def change_turn(self):
+        self.to_play = not self.to_play
 
     def render(self):
         rendered = ""
@@ -59,17 +62,6 @@ class Board():
                     rendered = rendered+"."
             rendered = rendered+"\n"
         return rendered
-
-    def populate_node_tree(self):
-        current_board = copy.copy(self)
-        for i in range(self.MAX_DEPTH):
-            for p in self.pieces:
-                if(p.is_white == current_board.to_play):
-                    # TODO: Pass in copy of board when self.MAX_DEPTH > 1
-                    for m in p.get_valid_moves(current_board):
-                        # TODO: Track parent node when self.MAX_DEPTH > 1
-                        n = node.Node(None, current_board, m)
-                        self.node_tree[i].append(n)
 
 if __name__ == '__main__':
     print(Board().render())

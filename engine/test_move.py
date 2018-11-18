@@ -26,6 +26,7 @@ class MoveTest(unittest.TestCase):
         b.pieces.extend([q,p])
         self.assertTrue(move.Move(q,  T(1,1,1)).is_valid(b))
         self.assertFalse(move.Move(q, T(0,1,2)).is_valid(b))
+        self.assertFalse(move.Move(q, T(0,1,1)).is_valid(b))
 
     def test_is_valid_capture(self):
         q = pc.Queen(3,3)
@@ -45,7 +46,7 @@ class MoveTest(unittest.TestCase):
         m.apply(bo)
         self.assertEqual(b.get_position()[0], 2)
         self.assertEqual(b.get_position()[1], 2)
-
+    
 if __name__ == '__main__':
     unittest.main()
 

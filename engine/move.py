@@ -44,8 +44,9 @@ class Move():
         if(self.is_capture):
             board.remove_piece_at(self.new_pos[0], self.new_pos[1])
         self.piece.set_position(self.new_pos[0], self.new_pos[1])
+        board.change_turn()
 
-    def value(self):
+    def value(self, board):
         if(self.is_capture):
             return board.get_piece_at(self.new_pos[0], self.new_pos[1]).value
         else:

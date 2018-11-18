@@ -4,13 +4,12 @@ class Node():
 
     def __init__(self, parent, board, move):
         self.parent = parent
-        self.move = move
-        self.value = move.value()
         self.board = copy.copy(board)
-
-    def apply(self):
-        if(self.parent is not None):
-            raise "Not root node."
+        if(parent is None):
+            self.depth = 1
         else:
-            self.move.apply()
+            self.depth = parent.depth + 1
+        self.move = move
+        self.value = move.value(self.board)
+        self.move.apply(self.board)
 
