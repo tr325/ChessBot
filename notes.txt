@@ -1,3 +1,24 @@
+2018-11-16
+* copy library only does a shallow copy, so traversing the tree isn't working.
+--> A) deep copy; or
+--> B) apply and then revert moves as you traverse the tree
+* I think B is likely to be better, as working out which copy of copy of copy of board you're using is already confusing. Should be able to wreite tests to make sure moves are undone when you revert up the tree.
+
+----------------------------------------------------------------
+
+Thoughts:
+Don't think the tree belongs in Board - separation of concerns should be:
+1) Board and Pieces know what is valid gameplay (ie. game engine)
+2) Evaluation method of future moves exists - decision engine
+3) Method of linking the two - tree structure. (decision engine may prune before evaluating the whole tree)
+So:
+- Move tree off Board, into a new place. It contains Nodes, these know a board state, and contain a value. The tree then assignes a *branch* score, and picks the branch that has highest score.
+- The first Move of that branch is then applied, and we continue.
+- Tree elsewhere. Nodes evaluated depth first into tree. Only branch score is saved. Score is evaluated by summing score of best path of nodes.
+** Not sure what to do with "apply" - lots of copies of board flying around, does this even make sense any more? Possibly nodes should apply the moves to their copies of board, and engine just returns the node.board of the node it picks. 
+
+
+==================================================================
 # TODO next:
 Re-read RvR's talk notes! (Or even re-watch?)
 Get move tables.
@@ -13,7 +34,9 @@ Further child moves should use Node's board as currentBoard
 
 ... except Move has board on it. Piece.getValidMoves is passed a board. move is then created with that board. 
 getValidMoves is called from Board.popoulteNodetree. So can pass through a cloned board, and save that to the Move, not the Node
-Move.apply9 then directly edits the board that's passed. But htat has to be done after evaulation because each of the possible valid moves for a piece would use the csame currentBoard object
+Move.apply then directly edits the board that's passed. But htat has to be done after evaulation because each of the possible valid moves for a piece would use the same currentBoard object. "after evaluation"? That doesn't work. That would result in us only being able to evaluate a single depth of nodeTree.
+
+So. Need to move board to Node. and then move can Apply to that board after isValid check. saves iterating too. 
 
 
 ===================================================================
