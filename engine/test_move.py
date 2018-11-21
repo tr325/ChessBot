@@ -46,23 +46,7 @@ class MoveTest(unittest.TestCase):
         m.apply(bo)
         self.assertEqual(b.get_position()[0], 2)
         self.assertEqual(b.get_position()[1], 2)
-
-    def test_apply_capture(self):
-        bo = board.Board()
-        bo._clear_board()
-        b = pc.Bishop(5,5)
-        q = pc.Queen(6,6,True)
-        bo = board.Board()
-        bo._clear_board()
-        bo.pieces.append(b)
-        bo.pieces.append(q)
-        m = move.Move(b, T(1,1,1))
-        m.is_valid(bo)
-        m.apply(bo)
-        m.undo(bo)
-        self.assertEqual(b.get_position()[0], 5)
-        self.assertEqual(b.get_position()[1], 5)
-        self.assertEqual(bo.get_piece_at(6,6), q)
+        self.assertTrue(bo.get_piece_at(5,5) is None)
 
     def test_undo(self):
         b = pc.Bishop(5,5)
