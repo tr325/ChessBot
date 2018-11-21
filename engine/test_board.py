@@ -27,6 +27,16 @@ class BoardTest(unittest.TestCase):
             "PPPPPPPP\n"+
             "RNBQKBNR\n")
 
+    def test_pieces_black_and_white(self):
+        black = []
+        white = []
+        for p in self.board.pieces:
+            if p.is_white:
+                white.append(p)
+            else:
+                black.append(p)
+        self.assertEqual(len(white), 16)
+        self.assertEqual(len(black), 16)
 
 if __name__ == '__main__':
     unittest.main()

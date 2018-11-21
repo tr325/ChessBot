@@ -6,11 +6,13 @@ class Move():
 
     def __init__(self, piece, transform):
         self.piece = piece
+        self.original_position = piece.get_position()
         self.t = transform
         self.is_capture = False
+        self.captured_piece = None
 
     def str(self):
-        move_str = self.piece.str()
+        move_str = self.piece.str()+" "
         if(self.is_capture):
             move_str = move_str+'x'
         move_str = move_str+self.FILES[self.new_pos[0]]
@@ -42,8 +44,16 @@ class Move():
 
     def apply(self, board):
         if(self.is_capture):
+            self.captured_piece = board.get_piece_at(self.new_pos[0], self.new_pos[1])
             board.remove_piece_at(self.new_pos[0], self.new_pos[1])
         self.piece.set_position(self.new_pos[0], self.new_pos[1])
+        board.change_turn()
+
+    def undo(self, board):
+        if(self.captured_piece is not None):
+            board.pieces.append(self.captured_piece)
+        self.piece.set_position(self.original_position[0], self.original_position[1])
+        # changing turn forwards and backwards is equivalent
         board.change_turn()
 
     def value(self, board):

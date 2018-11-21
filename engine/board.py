@@ -1,6 +1,5 @@
 import pieces as pc
 import node as node
-import copy
 
 class Board():
     
