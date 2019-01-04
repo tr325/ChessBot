@@ -16,6 +16,14 @@ class TreeTest(unittest.TestCase):
         self.assertEqual(len(self.tree.leaves), 20)
         self.assertEqual(len(b.pieces), 32)
 
+    # Check there are the right number of black first moves
+    def test_TEMP_check_black_leaves_length_1(self):
+        b = self.new_board
+        self.tree.set_depth(1)
+        b.change_turn()
+        self.tree.find_leaf_nodes(b, None)
+        self.assertEqual(len(self.tree.leaves), 20)
+
     def test_check_leaves_length_2(self):
         self.tree.set_depth(2)
         self.tree.find_leaf_nodes(self.new_board, None)

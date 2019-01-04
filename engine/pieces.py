@@ -56,13 +56,13 @@ class Pawn(Piece):
     #TODO: en passant
     def get_valid_moves(self, board):
         m = self._magnitude()
-        if(board.get_piece_at(self.x, self.y+1) == None):
+        if(board.get_piece_at(self.x, self.y+m) == None):
             self._append_valid_move(board, Move(self, T(0,m,1)))
         if(not self.has_moved):
             self._append_valid_move(board, Move(self, T(0,m,2)))
-        if(board.get_piece_at(self.x+1, self.y+1) != None):
+        if(board.get_piece_at(self.x+1, self.y+m) != None):
             self._append_valid_move(board, Move(self, T(1,m,1)))
-        if(board.get_piece_at(self.x-1, self.y+1) != None):
+        if(board.get_piece_at(self.x-1, self.y+m) != None):
             self._append_valid_move(board, Move(self, T(-1,m,1)))
         return self.valid_moves
 
