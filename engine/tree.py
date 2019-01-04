@@ -20,6 +20,7 @@ class Tree():
         for p in board.pieces:
             if(p.is_white == board.to_play):
                 for m in p.get_valid_moves(board):
+                    m.apply(board)
                     n = N.Node(parent_node, board, m)
                     if(n.depth == self.max_depth):
                         self.leaves.append(n)

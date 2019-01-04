@@ -9,5 +9,4 @@ class Node():
             self.depth = parent.depth + 1
         self.move = move
         self.value = move.value(board)
-        self.move.apply(board)
 

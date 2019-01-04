@@ -63,6 +63,17 @@ class MoveTest(unittest.TestCase):
         self.assertEqual(b.get_position()[1], 5)
         self.assertEqual(bo.get_piece_at(6,6), q)
 
+    def test_negative_magnitude(self):
+        p = pc.Pawn(5,5, True)
+        bo = board.Board()
+        bo._clear_board()
+        bo.pieces.append(p)
+        m = move.Move(p, T(0,-1,1))
+        m.is_valid(bo)
+        m.apply(bo)
+        self.assertEqual(p.get_position()[0], 5)
+        self.assertEqual(p.get_position()[1], 4)
+
 if __name__ == '__main__':
     unittest.main()
 

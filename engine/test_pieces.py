@@ -1,6 +1,6 @@
 import unittest
 import pieces as P
-import board as board
+import board as B
 
 class PiecesTest(unittest.TestCase):
     
@@ -20,9 +20,6 @@ class PiecesTest(unittest.TestCase):
         pos = q.get_position()
         self.assertEqual(pos[0], 4)
         self.assertEqual(pos[1], 5)
-
-    # Note: no real need to test get_valid_moves implementations,
-    # as these are obvious from tree
 
 if __name__ == '__main__':
     unittest.main()
