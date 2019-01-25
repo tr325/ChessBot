@@ -40,9 +40,12 @@ class Move():
                 is_valid = False
         if(is_valid):
             self.new_pos = pos
+        self.is_valid = is_valid
         return is_valid
 
     def apply(self, board):
+        if(not self.is_valid):
+            raise Exception("Cannot apply an invalid move")
         if(self.is_capture):
             self.captured_piece = board.get_piece_at(self.new_pos[0], self.new_pos[1])
             board.remove_piece_at(self.new_pos[0], self.new_pos[1])

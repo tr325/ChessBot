@@ -12,7 +12,7 @@ class Piece():
         self.x = x
         self.y = y
         self.valid_moves = []
-        
+
     def get_position(self):
         return [self.x, self.y]
 

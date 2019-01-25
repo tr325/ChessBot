@@ -9,6 +9,13 @@ class TreeTest(unittest.TestCase):
         self.tree = tree.Tree()
         self.new_board = b.Board()
 
+    # Utilities
+    def stringify(self, leaf):
+        return leaf.parent.move.str()+" - "+leaf.move.str()
+
+    #--------------------------------------------------
+    # Tests
+
     def test_check_leaves_length_1(self):
         b = self.new_board
         self.tree.set_depth(1)
@@ -35,8 +42,9 @@ class TreeTest(unittest.TestCase):
         for l in self.tree.leaves:
             self.assertFalse(l.move.piece.is_white)
 
-    def stringify(self, leaf):
-        return leaf.parent.move.str()+" - "+leaf.move.str() 
+    #---------------------------------------------
+    # Below here: only tests to track down length two move count issue
+    # TODO: review which are needed when that's resolved
 
     # TEMP test to check if there are the right numbers of *unique* moves
     # ... then find out why there are duplicates later
@@ -55,6 +63,19 @@ class TreeTest(unittest.TestCase):
         self.tree.find_leaf_nodes(self.new_board, None)
         for l in self.tree.leaves:
             self.assertTrue(l.parent is not None)
+
+    def test_length_each_branch(self):
+        self.tree.set_depth(2)
+        self.tree.find_leaf_nodes(self.new_board, None)
+        branches = {}
+        for l in self.tree.leaves:
+            parent = l.parent.move.str()
+            if(not parent in branches):
+                branches[parent] = []
+            branches[parent].append(l.move.str())
+        for b in branches:
+            print(len(branches[b]))
+
 
 if __name__ == '__main__':
     unittest.main()
