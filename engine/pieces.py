@@ -11,7 +11,6 @@ class Piece():
         self.is_white = not is_black
         self.x = x
         self.y = y
-        self.valid_moves = []
 
     def get_position(self):
         return [self.x, self.y]
@@ -55,9 +54,7 @@ class Pawn(Piece):
 
     #TODO: en passant
     def get_valid_moves(self, board):
-        # Prevents each "recalculation" simply appending more moves
-        # TODO: This is very inefficient - could be stored and only
-        # updated when this piece moves, but this will do for now
+        # Prevents future calls appending to the same array
         self.valid_moves = []
         m = self._magnitude()
         if(board.get_piece_at(self.x, self.y+m) == None):
@@ -75,6 +72,7 @@ class Rook(Piece):
     value = 5
 
     def get_valid_moves(self, board):
+        # Prevents future calls appending to the same array
         self.valid_moves = []
         moves = []
         directions = [[0,1],[0,-1],[1,0],[-1,0]]
@@ -89,6 +87,7 @@ class Bishop(Piece):
     value = 3
 
     def get_valid_moves(self, board):
+        # Prevents future calls appending to the same array
         self.valid_moves = []
         moves = []
         directions = [[1,1],[1,-1],[-1,1],[-1,-1]]
@@ -103,6 +102,7 @@ class Knight(Piece):
     value = 3
 
     def get_valid_moves(self, board):
+        # Prevents future calls appending to the same array
         self.valid_moves = []
         transforms = [T(1,2,1), T(2,1,1), T(2,-1,1), T(1,-2,1), T(-1,-2,1), T(-2,-1,1), T(-2,1,1), T(-1,2,1)]
         for t in transforms:
@@ -114,6 +114,7 @@ class Queen(Piece):
     value = 9
 
     def get_valid_moves(self, board):
+        # Prevents future calls appending to the same array
         self.valid_moves = []
         moves = []
         directions = [[1,1],[1,-1],[-1,1],[-1,-1],[0,1],[0,-1],[1,0],[-1,0]]
@@ -129,6 +130,7 @@ class King(Piece):
 
     #TODO: castling
     def get_valid_moves(self, board):
+        # Prevents future calls appending to the same array
         self.valid_moves = []
         moves = []
         transforms = [T(1,1,1),T(1,-1,1),T(-1,1,1),T(-1,-1,1),T(0,1,1),T(0,-1,1),T(1,0,1),T(-1,0,1)]
