@@ -76,7 +76,6 @@ class TreeTest(unittest.TestCase):
         for b in branches:
             print(len(branches[b]))
 
-
 if __name__ == '__main__':
     unittest.main()
 
