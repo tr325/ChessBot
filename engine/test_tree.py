@@ -2,7 +2,6 @@ import unittest
 import board as b
 import tree
 
-#TODO: use assertIsNone, assertIsNotNone
 class TreeTest(unittest.TestCase):
 
     def setUp(self):
@@ -17,11 +16,9 @@ class TreeTest(unittest.TestCase):
     # Tests
 
     def test_check_leaves_length_1(self):
-        b = self.new_board
         self.tree.set_depth(1)
-        self.tree.find_leaf_nodes(b, None)
+        self.tree.find_leaf_nodes(self.new_board, None)
         self.assertEqual(len(self.tree.leaves), 20)
-        self.assertEqual(len(b.pieces), 32)
 
     def test_check_leaves_length_2(self):
         self.tree.set_depth(2)
@@ -33,7 +30,6 @@ class TreeTest(unittest.TestCase):
         self.tree.find_leaf_nodes(self.new_board, None)
         for l in self.tree.leaves:
             self.assertFalse(l.move.piece.is_white)
-
 
 if __name__ == '__main__':
     unittest.main()

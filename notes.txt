@@ -1,3 +1,15 @@
+2019-02-25
+* NB. Chromebook struggles with depth > 2, so to test properly will need to move machine.
+So what can be usefully developed on it?
+* branch evaluation
+* UI
+Next steps:
+- Can write tests for branch evaluation with carefully constructed board states.
+    Or by mocking the branches data structure to only contain a few options. Manually create the data structure so it's less of an End-to-End and more of a Unit test
+- Some kind of main() loop to get keyboard input, interpret user moves, and play a move for the computer
+- Branch evaluation should then return 'best' move, evaluated however that evaluation method works. (Starting with "max points", and getting more sophisticated)
+
+
 2018-11-16
 * copy library only does a shallow copy, so traversing the tree isn't working.
 --> A) deep copy; or
