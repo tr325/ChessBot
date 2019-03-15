@@ -1,5 +1,5 @@
-from transform import Transform as T
-from move import Move
+from engine.transform import Transform as T
+from engine.move import Move
 
 class Piece():
     display_as = "x" # Overwrite in child classes

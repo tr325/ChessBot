@@ -1,5 +1,5 @@
-import pieces as pc
-import node as node
+import engine.pieces as pc
+import engine.node as node
 
 class Board():
     

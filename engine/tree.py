@@ -1,5 +1,4 @@
-import node as N
-import board as B
+import engine.node as N
 
 class Tree():
     
