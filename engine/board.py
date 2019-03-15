@@ -45,7 +45,7 @@ class Board():
 
     def remove_piece_at(self, x, y):
         p = self.get_piece_at(x, y)
-        # TODO: simplest way to remove a value from an array in python?
+        self.pieces.remove(p)
 
     def change_turn(self):
         self.to_play = not self.to_play

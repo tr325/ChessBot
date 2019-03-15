@@ -1,8 +1,8 @@
 import unittest
-import move
-import board
-import pieces as pc
-from transform import Transform as T
+import engine.move as move
+import engine.board as board
+import engine.pieces as pc
+from engine.transform import Transform as T
 
 class MoveTest(unittest.TestCase):
 

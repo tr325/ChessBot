@@ -1,5 +1,5 @@
 import unittest
-import board
+import engine.board as board
 
 class BoardTest(unittest.TestCase):
     
@@ -27,16 +27,19 @@ class BoardTest(unittest.TestCase):
             "PPPPPPPP\n"+
             "RNBQKBNR\n")
 
-    def test_pieces_black_and_white(self):
-        black = []
-        white = []
-        for p in self.board.pieces:
-            if p.is_white:
-                white.append(p)
-            else:
-                black.append(p)
-        self.assertEqual(len(white), 16)
-        self.assertEqual(len(black), 16)
+    def test_remove_piece_at(self):
+        b = self.board
+        b.remove_piece_at(0,0)
+        b.remove_piece_at(6,6)
+        self.assertEqual(self.board.render(),
+            "rnbqkbnr\n"+
+            "pppppp.p\n"+
+            "........\n"+
+            "........\n"+
+            "........\n"+
+            "........\n"+
+            "PPPPPPPP\n"+
+            ".NBQKBNR\n")
 
 if __name__ == '__main__':
     unittest.main()

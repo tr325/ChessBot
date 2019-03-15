@@ -1,6 +1,6 @@
 import unittest
-import board as b
-import tree
+import engine.board as b
+import engine.tree as tree
 
 class TreeTest(unittest.TestCase):
 

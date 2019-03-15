@@ -1,6 +1,6 @@
 import unittest
-import pieces as P
-import board as B
+import engine.pieces as P
+import engine.board as B
 
 class PiecesTest(unittest.TestCase):
 

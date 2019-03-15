@@ -2,8 +2,7 @@ I decided to write a Chess Bot.
 
 Run all engine tests with:
 
-```python3 -m unittest discover -s test/```
+```python3 -m unittest discover -s engine/test/```
 
-from within the ```engine``` directory.
-
+from the root directory.
 
