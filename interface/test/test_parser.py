@@ -1,9 +1,9 @@
 import unittest
-import interface.parser as Parser
+import interface.parser as parser
 
 class ParserTest(unittest.TestCase):
 
     def test_exists(self):
-        p = Parser()
+        p = parser.Parser()
 
 
