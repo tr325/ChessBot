@@ -12,7 +12,9 @@ class Move():
         self.captured_piece = None
 
     def str(self):
-        move_str = self.piece.str()+" "
+        move_str = ""
+        if(self.piece.str().upper() != "P"):
+            move_str = move_str+self.piece.str()+" "
         if(self.is_capture):
             move_str = move_str+'x'
         move_str = move_str+self.FILES[self.new_pos[0]]
