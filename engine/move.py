@@ -13,10 +13,15 @@ class Move():
 
     def str(self):
         move_str = ""
-        if(self.piece.str().upper() != "P"):
-            move_str = move_str+self.piece.str()+" "
-        if(self.is_capture):
-            move_str = move_str+'x'
+        if(self.piece.str().upper() == "P"):
+            if(self.is_capture):
+                move_str = 'x'
+        else:
+            move_str = self.piece.str()
+            if(self.is_capture):
+                move_str = move_str+'x'
+            else:
+                move_str = move_str+' '
         move_str = move_str+self.FILES[self.new_pos[0]]
         move_str = move_str+str(self.new_pos[1]+1)
         return move_str

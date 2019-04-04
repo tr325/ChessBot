@@ -1,6 +1,7 @@
 import unittest
 import interface.parser as parser
 import engine.board as board
+import engine.pieces as pieces
 
 class ParserTest(unittest.TestCase):
 
@@ -25,6 +26,13 @@ class ParserTest(unittest.TestCase):
 
     def test_pawn_move(self):
         user_move = 'd4'
+        move = self.parser.get_move(user_move, self.board)
+        self.assertEqual(user_move, move.str())
+
+    def test_capture(self):
+        bishop = pieces.Bishop(7,5) # h6
+        self.board.pieces.append(bishop)
+        user_move = 'Bxg7'
         move = self.parser.get_move(user_move, self.board)
         self.assertEqual(user_move, move.str())
 
