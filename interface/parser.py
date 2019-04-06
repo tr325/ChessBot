@@ -2,29 +2,20 @@
 class Parser():
 
     # TODO: castling, enpassant, etc. where the movestr is different
-    def get_move(self, string, board):
-        s = string.split(' ')
-        sx = string.split('x')
+    def get_move(self, user_string, board):
+        string = user_string.strip()
         possible_pieces = []
-        if(len(s) == 2):
-            possible_pieces = self._possible_pieces_on_board(s[0], board)
-        elif(len(sx) == 2):
-            possible_pieces =  self._possible_pieces_on_board(sx[0], board)
+        if(string[0].isupper()):
+            possible_pieces = self._possible_pieces_on_board(string[0], board)
         else:
             possible_pieces = self._possible_pieces_on_board('P', board)
         return self._find_user_move(string, possible_pieces, board)
 
-    def _possible_pieces_on_board(self, user_string_parts, board):
-        # Maybe....
-        # ... find pieces of right kind from board (new argument to init?) and check if any of their valid_moves is the same as that constructed here by user input?
-            # 1. for all pieces, p.str() == user_string_parts[0]
-            # 2. for all pices of the right kind:
-            # 3. do any of that piece's valid moves have the same move
-            #       string as entered by the user
+    def _possible_pieces_on_board(self, user_piece, board):
         possible_pieces = []
         for p in board.pieces:
             if(p.is_white == board.to_play):
-                if(p.str().upper() == user_string_parts[0]):
+                if(p.str().upper() == user_piece):
                     possible_pieces.append(p)
         return possible_pieces
 

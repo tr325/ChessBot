@@ -9,30 +9,40 @@ class ParserTest(unittest.TestCase):
         self.parser = parser.Parser()
         self.board = board.Board()
 
-    def test_piece_move(self):
-        user_move = 'N c3'
+    def assertMoveValid(self, user_move):
         move = self.parser.get_move(user_move, self.board)
         self.assertEqual(move.str(), user_move)
 
-    def test_invalid_move_destination(self):
-        user_move = 'N c4'
+    def assertMoveInvalid(self, user_move):
         move = self.parser.get_move(user_move, self.board)
         self.assertEqual(move, None)
+
+    def test_piece_move(self):
+        self.assertMoveValid('N c3')
+
+    def test_invalid_move_destination(self):
+        self.assertMoveInvalid('N c4')
 
     def test_wrong_colour_moved(self):
-        user_move = 'N c6'
-        move = self.parser.get_move(user_move, self.board)
-        self.assertEqual(move, None)
+        self.assertMoveInvalid('N c6')
 
     def test_pawn_move(self):
-        user_move = 'd4'
-        move = self.parser.get_move(user_move, self.board)
-        self.assertEqual(user_move, move.str())
+        self.assertMoveValid('d4')
 
     def test_capture(self):
         bishop = pieces.Bishop(7,5) # h6
         self.board.pieces.append(bishop)
-        user_move = 'Bxg7'
-        move = self.parser.get_move(user_move, self.board)
-        self.assertEqual(user_move, move.str())
+        self.assertMoveValid('Bxg7')
+
+    def test_pawn_capture(self):
+        self.board._setup_position_from_representation((
+            "rnbqkbnr\n"
+            "pp..pppp\n"
+            "........\n"
+            "..pp....\n"
+            "..PP....\n"
+            "........\n"
+            "PP..PPPP\n"
+            "RNBQKBNR"))
+        self.assertMoveValid('xc5')
 

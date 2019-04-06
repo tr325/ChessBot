@@ -17,7 +17,7 @@ class Move():
             if(self.is_capture):
                 move_str = 'x'
         else:
-            move_str = self.piece.str()
+            move_str = self.piece.str().upper()
             if(self.is_capture):
                 move_str = move_str+'x'
             else:
