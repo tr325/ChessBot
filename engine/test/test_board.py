@@ -41,6 +41,18 @@ class BoardTest(unittest.TestCase):
             "PPPPPPPP\n"+
             ".NBQKBNR\n")
 
+    def test__setup_from_representation(self):
+        rep = ("rnbqkbnr\n"
+            "pppppp.p\n"
+            "........\n"
+            "........\n"
+            "........\n"
+            "........\n"
+            "PPPPPPPP\n"
+            ".NBQKBNR\n")
+        self.board._setup_position_from_representation(rep)
+        self.assertEqual(self.board.render(), rep)
+
 if __name__ == '__main__':
     unittest.main()
 

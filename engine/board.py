@@ -34,10 +34,6 @@ class Board():
         for i in range(8):
             self.pieces.append(pc.Pawn(i,6,True))
 
-    # For ease of testing
-    def _clear_board(self):
-        self.pieces = []
-
     def get_piece_at(self, x, y):
         for p in self.pieces:
             if(p.is_at(x,y)):
@@ -61,6 +57,29 @@ class Board():
                     rendered = rendered+"."
             rendered = rendered+"\n"
         return rendered
+
+    #-----------------------------------------
+    # Private utility methods for ease of testing
+    def _clear_board(self):
+        self.pieces = []
+
+    PIECE_MAP = {
+        'r': lambda x,y,is_black: pc.Rook(x,y,is_black),
+        'n': lambda x,y,is_black: pc.Knight(x,y,is_black),
+        'b': lambda x,y,is_black: pc.Bishop(x,y,is_black),
+        'q': lambda x,y,is_black: pc.Queen(x,y,is_black),
+        'k': lambda x,y,is_black: pc.King(x,y,is_black),
+        'p': lambda x,y,is_black: pc.Pawn(x,y,is_black)
+    }
+
+    def _setup_position_from_representation(self, board_string):
+        self._clear_board()
+        rows = board_string.split('\n')
+        for y in range(8):
+            for x in range(8):
+                p = rows[7-y][x]
+                if(p.lower() in self.PIECE_MAP):
+                    self.pieces.append(self.PIECE_MAP[p.lower()](x,y,p.islower()))
 
 if __name__ == '__main__':
     print(Board().render())
