@@ -12,3 +12,15 @@ class NaiveTest(unittest.TestCase):
         move = self.naive.get_best_move(self.new_board)
         self.assertEqual(move.piece.is_white, self.new_board.to_play)
 
+    def test_takes_free_piece(self):
+        self.new_board._setup_position_from_representation(
+            "rnbqkbnr\n"
+            "p.pppppp\n"
+            "........\n"
+            ".p......\n"
+            "..P.....\n"
+            "........\n"
+            "PP.PPPPP\n"
+            "RNBQKBNR\n")
+        move = self.naive.get_best_move(self.new_board)
+        self.assertEqual(move.str(), "xb5")
