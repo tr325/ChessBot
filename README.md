@@ -4,9 +4,13 @@ Run all engine tests with:
 
 ```python3 -m unittest discover -s engine/test/```
 
-or all interface tests with:
+all interface tests with:
 
 ```python3 -m unittest discover -s interface/test/```
+
+and all decision tests with:
+
+```python3 -m unittest discover -s decision/test/```
 
 from the root directory.
 
