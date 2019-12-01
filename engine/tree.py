@@ -27,8 +27,4 @@ class Tree():
                         self.find_leaf_nodes(board, n)
                     m.undo(board)
 
-    # TODO: Doesn't live here
-    #def evaluate_branch(self, leaf_node):
-        # Use node.parent recursively to find point score for branch
-
 
