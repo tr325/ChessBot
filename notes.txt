@@ -1,3 +1,16 @@
+2019-12-18
+* Engine bug - pawns can take forwards!
+To reproduce: Q h5 --> h7 x h5 ?? 
+
+
+2019-04-08
+* Found an engine bug where the computer plays an illegal move. How to test and fully resolve?
+1) I mean, depth = 3 for the tree_test woud do it... but that requires not developing on the chromebook, which is where most of my work for this is done. sad.
+2) specific test for this failure mode?
+    - kinda fragile... doesn't in any sense garuantee that I'll get all the cases
+* Is this just a special case of "need to improve the engine"? eg. castling. en passant. promoting.Q
+
+
 2019-02-25
 * NB. Chromebook struggles with depth > 2, so to test properly will need to move machine.
 So what can be usefully developed on it?
