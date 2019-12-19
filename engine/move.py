@@ -39,6 +39,7 @@ class Move():
                 if(i == self.t.magnitude-1):
                     capture = (self.piece.is_white != occupant.is_white)
                     self.is_capture = capture
+                    self.captured_piece = occupant
                     is_valid = capture
                 else:
                     is_valid = False
@@ -54,7 +55,6 @@ class Move():
         if(not self.is_valid):
             raise Exception("Cannot apply an invalid move")
         if(self.is_capture):
-            self.captured_piece = board.get_piece_at(self.new_pos[0], self.new_pos[1])
             board.remove_piece_at(self.new_pos[0], self.new_pos[1])
         self.piece.set_position(self.new_pos[0], self.new_pos[1])
         board.change_turn()
@@ -67,7 +67,7 @@ class Move():
         board.change_turn()
 
     def value(self, board):
-        if(self.is_capture):
-            return board.get_piece_at(self.new_pos[0], self.new_pos[1]).value
+        if(self.captured_piece):
+            return self.captured_piece.value
         else:
             return 0

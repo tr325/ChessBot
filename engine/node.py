@@ -9,4 +9,5 @@ class Node():
             self.depth = parent.depth + 1
         self.move = move
         self.value = move.value(board)
+        self.player = move.piece.is_white
 
