@@ -8,15 +8,23 @@ class Naive():
         tree.find_leaf_nodes(board, None)
         current_best = 0
         best_move = None
-        # for each leaf, score branch until.. parent is none
+        # for each leaf, score all nodes on branch until parent is none
         for leaf in tree.leaves:
-            score = 0
-            current_leaf = leaf
-            while current_leaf.parent is not None:
-                score = score+current_leaf.value
-                current_leaf = current_leaf.parent
-            score = score+current_leaf.value
-            # compare score to currentBest.
+            current_node = leaf
+            if(current_node.player == board.to_play):
+                score = current_node.value
+            else:
+                score = -current_node.value
+            # TODO: Current looks for best max score. Change to
+            # look instead for best MIN score (ie, no loss of material)
+            while current_node.parent is not None:
+                current_node = current_node.parent
+                if(current_node.player == board.to_play):
+                    score = score+current_node.value
+                else:
+                    score = score-current_node.value
             if(score >= current_best):
-                best_move = current_leaf.move
+                current_best = score
+                # current_node is now the root
+                best_move = current_node.move
         return best_move
