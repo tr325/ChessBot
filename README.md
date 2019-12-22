@@ -1,6 +1,10 @@
 I decided to write a Chess Bot.
 
-You can play against yourself from the command line using ```python3 main.py``` -- it's not yet finished, so some issues are expected. Eventually the program will play against you.
+You can play against yourself from the command line using ```python3 main.py``` -- it's not yet finished, so some issues are expected.
+
+Currently the human player plays as white and the computer plays black against you. 
+
+#Tests
 
 Run all engine tests with:
 
