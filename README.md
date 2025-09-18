@@ -4,7 +4,7 @@ You can play against yourself from the command line using ```python3 main.py``` 
 
 Currently the human player plays as white and the computer plays black against you. 
 
-#Tests
+# Tests
 
 Run all engine tests with:
 
